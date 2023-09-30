@@ -13,10 +13,10 @@ variable "cidr_block" {
   default = "cidr_block"
 }
 
-variable "subnets" {
+variable "subnet" {
   type = map(any)
   default = {
-    public_subnets = {
+    public_subnet = {
       public-1 = {
         name = "public-1"
         cidr = "10.0.1.0/24"
@@ -33,7 +33,7 @@ variable "subnets" {
         az   = "ap-northeast-1d"
       },
     }
-    private_subnets = {
+    private_subnet = {
       private-1 = {
         name = "private-1"
         cidr = "10.0.4.0/24"
@@ -61,4 +61,44 @@ variable "instance_ami" {
 variable "instance_type" {
   type    = string
   default = "t2.micro"
+}
+
+variable "db_storage" {
+  type    = string
+  default = "20"
+}
+
+variable "db_storage_type" {
+  type    = string
+  default = "gp3"
+}
+
+variable "db_name" {
+  type    = string
+  default = "mydb"
+}
+
+variable "db_engine" {
+  type    = string
+  default = "mysql"
+}
+
+variable "db_engine_version" {
+  type    = string
+  default = "5.7"
+}
+
+variable "db_instance_class" {
+  type    = string
+  default = "db.t3.micro"
+}
+
+variable "db_username" {
+  type    = string
+  default = "username"
+}
+
+variable "db_password" {
+  type    = string
+  default = "password"
 }

@@ -23,11 +23,11 @@ resource "aws_launch_template" "template" {
 }
 
 resource "aws_autoscaling_group" "autoscaling_group" {
-  desired_capacity   = 2
-  max_size           = 3
-  min_size           = 2
+  desired_capacity   = 1
+  max_size           = 1
+  min_size           = 1
 
-  vpc_zone_identifier = [var.public_subnets[1], var.public_subnets[2]]
+  vpc_zone_identifier = [var.public_subnet[1], var.public_subnet[2]]
 
 
   launch_template {
