@@ -63,3 +63,15 @@ module "rds" {
 
   depends_on = [module.network]
 }
+
+module "rds-auto-promote" {
+  source = "../../modules/rds-auto-promote"
+
+  env  = var.env
+  name = var.name
+
+  rds_id = module.rds.rds_id
+  rds_identifier = module.rds.rds_identifier
+  replica_id = module.rds.replica_id
+  replica_arn = module.rds.replica_arn
+}
