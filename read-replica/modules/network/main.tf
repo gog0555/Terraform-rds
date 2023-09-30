@@ -13,7 +13,7 @@ resource "aws_subnet" "public_subnet" {
   vpc_id     = aws_vpc.main.id
   map_public_ip_on_launch  = true
 
-  for_each = var.subnets.public_subnets
+  for_each = var.subnet.public_subnet
   cidr_block = each.value.cidr
   availability_zone = each.value.az
 
@@ -25,7 +25,7 @@ resource "aws_subnet" "public_subnet" {
 resource "aws_subnet" "private_subnet" {
   vpc_id     = aws_vpc.main.id
 
-  for_each = var.subnets.private_subnets
+  for_each = var.subnet.private_subnet
   cidr_block = each.value.cidr
   availability_zone = each.value.az
 
@@ -58,7 +58,7 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table_association" "public" {
-  for_each = var.subnets.public_subnets
+  for_each = var.subnet.public_subnet
   subnet_id      = aws_subnet.public_subnet[each.key].id
   route_table_id = aws_route_table.public.id
 }
