@@ -59,7 +59,7 @@ module "rds" {
   public_subnet  = module.network.public_subnet
   private_subnet = module.network.private_subnet
 
-  ec2_sg_id     = module.ec2.ec2_sg_id
+  ec2_sg_id = module.ec2.ec2_sg_id
 
   depends_on = [module.network]
 }
