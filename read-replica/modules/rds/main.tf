@@ -10,6 +10,7 @@ resource "aws_db_instance" "db_instance" {
   allocated_storage    = var.db_storage
   storage_type         = var.db_storage_type
 
+  identifier           = "${var.env}-${var.name}-db-instance"
   db_name              = var.db_name
   engine               = var.db_engine
   engine_version       = var.db_engine_version
@@ -21,6 +22,17 @@ resource "aws_db_instance" "db_instance" {
   multi_az             = false
   db_subnet_group_name        = aws_db_subnet_group.db_subnet_group.name
   backup_retention_period     = 1
+
+  vpc_security_group_ids = [aws_security_group.rds_sg.id]
+}
+
+resource "aws_db_instance" "test-replica" {
+  replicate_source_db         = aws_db_instance.db_instance.identifier
+  backup_retention_period     = 1
+  identifier                  = "${var.env}-${var.name}-replica"
+  instance_class              = var.db_instance_class
+  multi_az                    = false
+  skip_final_snapshot         = true
 
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
 }
